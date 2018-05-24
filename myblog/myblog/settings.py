@@ -120,7 +120,8 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+# 正确归档需要修改为False，否则会显示归档页面为空
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
