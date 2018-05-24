@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # 定义类别数据库表
 class Category(models.Model):
@@ -29,3 +30,7 @@ class Post(models.Model):
 	tags = models.ManyToManyField(Tag, blank=True)
 	# django.contrib.auth 是 Django 内置的应用，专门用于处理网站用户的注册、登录等流程，User 是 Django 为我们已经写好的用户模型。
 	author = models.ForeignKey(User)
+
+
+	def get_absolute_url(self):
+		return reverse('blog:detail', kwargs={'pk': self.pk})
