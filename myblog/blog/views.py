@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Category
+from comments.forms import CommentForm
 import markdown
 
 # 起始页
@@ -17,7 +18,14 @@ def detail(request, pk):
 									  'markdown.extensions.codehilite',
 									  'markdown.extensions.toc',
 								  ])
-	return render(request, 'blog/detail.html', context={'post': post})
+	form = CommentForm()
+	# 获取这篇post下的全部评论
+	commit_list = post.comment_set.all()
+
+	context = {'post': post,
+			   'form': form,
+			   'comment_list': commit_list}
+	return render(request, 'blog/detail.html', context=context)
 
 
 # 归档页
